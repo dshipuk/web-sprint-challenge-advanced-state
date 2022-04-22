@@ -1,31 +1,35 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import * as actionCreators from '../state/action-creators'
+import axios from 'axios'
 
 export function Form(props) {
-  console.log(props)
-  
+
   const onChange = evt => {
     props.inputChange(evt.target.id, evt.target.value)
   }
 
   const onSubmit = evt => {
     evt.preventDefault();
-
+    evt.target.reset()
+    const newQuiz = {
+      "question_text": props.form.newQuestion,
+      "true_answer_text": props.form.newTrueAnswer,
+      "false_answer_text": props.form.newFalseAnswer
   }
-
-  // useEffect( () => {
-  //   const button = document.getElementById("submitNewQuizBtn")
-  //   const questionInput = props.form.newQuestion != ""
-  //   const trueAnswerInput = props.form.newTrueAnswer != ""
-  //   const falseAnswerInput = props.form.newFalseAnswer != ""
-
-  //   if (questionInput && trueAnswerInput && falseAnswerInput) {
-  //     button.disabled = false
-  //   } else {
-  //     button.disabled = true
-  //   }
-  // }, [props.form])
+    axios.post("http://localhost:9000/api/quiz/new", newQuiz)
+      .then(res => {
+        props.setMessage(res.data.question)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+      .finally(
+        props.inputChange("newQuestion", ""),
+        props.inputChange("newTrueAnswer", ""), 
+        props.inputChange("newFalseAnswer", "")
+      )
+  }
 
   return (
     <form id="form" onSubmit={onSubmit}>

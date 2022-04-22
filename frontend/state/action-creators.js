@@ -19,7 +19,15 @@ export function selectAnswer() {
   }
 }
 
-export function setMessage() { }
+export function setMessage(message) { 
+  return {
+    type: actions.SET_INFO_MESSAGE,
+    payload: {
+      msg: message,
+      context: "submittedQuiz"
+    }
+  }
+}
 
 export function setQuiz() { }
 

@@ -7,7 +7,6 @@ const initialWheelState = 0
 function wheel(state = initialWheelState, action) {
   switch (action.type) {
     case actions.MOVE_CLOCKWISE:
-      console.log(state)
       if (state === 5) {
         return state = 0
       } else {
@@ -39,9 +38,61 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   return state
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const initialMessageState = ''
 function infoMessage(state = initialMessageState, action) {
-  return state
+  switch (action.type) {
+    case actions.SET_INFO_MESSAGE:
+      switch (action.payload.context) {
+        case "submittedQuiz":
+          return state = `Congrats: "${action.payload.msg}" is a great question!`
+        default:
+          return state
+      }
+    default:
+      return state
+  }
 }
 
 const initialFormState = {
