@@ -1,10 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { moveClockwise } from "../state/action-creators"
 
-export default function Wheel(props) {
+const Wheel = (props) => {
+  console.log(props)
+
+  useEffect(() =>{
+    const wheelParent = document.getElementById("wheel")
+    const wheelChildren = wheelParent.childNodes
+    
+    for (let i = 0; i < wheelChildren.length; i++) {
+      if (i === props.wheel) {
+        wheelChildren[i].textContent = "B"
+        wheelChildren[i].className = "cog active"
+      } else {
+        wheelChildren[i].textContent = ""
+        wheelChildren[i].className = "cog"
+      }
+    }
+  }, [props.wheel])
+
+  const goClockWise = () => {
+    props.moveClockwise()
+  }
+  
   return (
     <div id="wrapper">
       <div id="wheel">
-        <div className="cog active" style={{ "--i": 0 }}>B</div>
+        <div className="cog active" style={{ "--i": 0 }}></div>
         <div className="cog" style={{ "--i": 1 }}></div>
         <div className="cog" style={{ "--i": 2 }}></div>
         <div className="cog" style={{ "--i": 3 }}></div>
@@ -13,8 +36,16 @@ export default function Wheel(props) {
       </div>
       <div id="keypad">
         <button id="counterClockwiseBtn" >Counter clockwise</button>
-        <button id="clockwiseBtn">Clockwise</button>
+        <button id="clockwiseBtn" onClick={goClockWise}>Clockwise</button>
       </div>
     </div>
   )
 }
+
+const mapState = (s) => {
+  return {
+    wheel: s.wheel
+  }
+}
+
+export default connect(mapState, { moveClockwise })(Wheel);
