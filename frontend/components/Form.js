@@ -20,6 +20,8 @@ export function Form(props) {
     axios.post("http://localhost:9000/api/quiz/new", newQuiz)
       .then(res => {
         props.setMessage(res.data.question)
+        console.log(res)
+        console.log(newQuiz)
       })
       .catch(err => {
         console.log(err)
