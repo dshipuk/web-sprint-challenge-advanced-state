@@ -1,6 +1,7 @@
 // ❗ You don't need to add extra reducers to achieve MVP
 import { combineReducers } from 'redux'
 import * as actions from "./action-types"
+import axios from 'axios'
 
 const initialWheelState = 0
 function wheel(state = initialWheelState, action) {
@@ -25,7 +26,12 @@ function wheel(state = initialWheelState, action) {
 
 const initialQuizState = null
 function quiz(state = initialQuizState, action) {
-  return state
+  switch(action.type) {
+    
+    
+    default:
+      return state
+  }
 }
 
 const initialSelectedAnswerState = null
@@ -44,7 +50,30 @@ const initialFormState = {
   newFalseAnswer: '',
 }
 function form(state = initialFormState, action) {
-  return state
+  switch (action.type) {
+    case actions.INPUT_CHANGE:
+      switch (action.payload.id) {
+        case "newQuestion":
+          return {
+            ...state,
+            newQuestion: action.payload.value
+          }
+        case "newTrueAnswer":
+          return {
+            ...state,
+            newTrueAnswer: action.payload.value
+          }
+        case "newFalseAnswer":
+          return {
+            ...state,
+            newFalseAnswer: action.payload.value
+          }
+        default:
+          return state
+      }
+    default:
+      return state
+  }
 }
 
 export default combineReducers({ wheel, quiz, selectedAnswer, infoMessage, form })

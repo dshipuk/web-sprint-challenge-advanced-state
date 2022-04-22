@@ -13,13 +13,25 @@ export function moveCounterClockwise() {
   }
 }
 
-export function selectAnswer() { }
+export function selectAnswer() { 
+  return {
+    type: actions.SET_SELECTED_ANSWER
+  }
+}
 
 export function setMessage() { }
 
 export function setQuiz() { }
 
-export function inputChange() { }
+export function inputChange(inputToChange, inputValue) { 
+  return {
+    type: actions.INPUT_CHANGE,
+    payload: {
+      id: inputToChange,
+      value: inputValue.trim()
+    }
+  }
+}
 
 export function resetForm() { }
 
