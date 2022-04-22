@@ -12,26 +12,12 @@ export function Form(props) {
 
   const onSubmit = evt => {
     evt.preventDefault();
-    evt.target.reset()
     const newQuiz = {
       "question_text": props.form.newQuestion,
       "true_answer_text": props.form.newTrueAnswer,
       "false_answer_text": props.form.newFalseAnswer
   }
-    axios.post("http://localhost:9000/api/quiz/new", newQuiz)
-      .then(res => {
-        props.setMessage(res.data.question)
-        console.log(res)
-        console.log(newQuiz)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-      .finally(
-        props.inputChange("newQuestion", ""),
-        props.inputChange("newTrueAnswer", ""), 
-        props.inputChange("newFalseAnswer", "")
-      )
+    props.postQuiz(newQuiz)
   }
 
   return (
