@@ -235,7 +235,6 @@ describe('Advanced State Sprint Challenge Submission', () => {
       let answerA = screen.queryByText(AFunction, queryOptions)
       fireEvent.click(answerA.querySelector('button'))
       fireEvent.click(submitAnswerBtn())
-      console.log("Success on Submitting Quiz 2")
       await screen.findByText(WhatIsPromise, queryOptions, waitForOptions)
       screen.getByText(ThatIsCorrect, queryOptions)
       answerA = screen.queryByText(AValue, queryOptions)
