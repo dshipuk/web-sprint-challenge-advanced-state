@@ -2,12 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 
 export function Message(props) {
-  return <div id="message">{props.infoMessage}</div>;
+  return <div id="message">{props.message}</div>;
 }
 
 const mapState = (s) => {
   return {
-    infoMessage: s.infoMessage,
+    message: s.infoMessage,
   };
 };
 

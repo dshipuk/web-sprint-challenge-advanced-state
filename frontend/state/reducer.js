@@ -26,9 +26,7 @@ const initialQuizState = null;
 function quiz(state = initialQuizState, action) {
   switch (action.type) {
     case actions.SET_QUIZ_INTO_STATE:
-      return action.payload.quizData;
-    case actions.RESET_FORM:
-      return (state = null);
+      return (state = action.payload.quizData);
     default:
       return state;
   }
@@ -38,9 +36,7 @@ const initialSelectedAnswerState = null;
 function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch (action.type) {
     case actions.SET_SELECTED_ANSWER:
-      return (state = action.payload.t);
-    case actions.RESET_FORM:
-      return (state = null);
+      return (state = action.payload.answer);
     default:
       return state;
   }
@@ -50,18 +46,7 @@ const initialMessageState = "";
 function infoMessage(state = initialMessageState, action) {
   switch (action.type) {
     case actions.SET_INFO_MESSAGE:
-      switch (action.payload.context) {
-        case "submittedQuiz":
-          return (state = `Congrats: "${action.payload.msg}" is a great question!`);
-        case "postQuiz":
-          return (state = action.payload.msg);
-        case "error":
-          return (state = action.payload.msg);
-        case "":
-          return (state = "");
-        default:
-          return state;
-      }
+      return (state = action.payload.message);
     default:
       return state;
   }
@@ -75,31 +60,28 @@ const initialFormState = {
 function form(state = initialFormState, action) {
   switch (action.type) {
     case actions.INPUT_CHANGE:
-      switch (action.payload.id) {
+      switch (action.payload.target) {
         case "newQuestion":
-          return {
-            ...state,
+          return Object.assign({}, state, {
             newQuestion: action.payload.value,
-          };
+          });
         case "newTrueAnswer":
-          return {
-            ...state,
+          return Object.assign({}, state, {
             newTrueAnswer: action.payload.value,
-          };
+          });
         case "newFalseAnswer":
-          return {
-            ...state,
+          return Object.assign({}, state, {
             newFalseAnswer: action.payload.value,
-          };
-        case actions.RESET_FORM:
-          return (state = {
-            newQuestion: "",
-            newTrueAnswer: "",
-            newFalseAnswer: "",
           });
         default:
           return state;
       }
+    case actions.RESET_FORM:
+      return (state = {
+        newQuestion: "",
+        newTrueAnswer: "",
+        newFalseAnswer: "",
+      });
     default:
       return state;
   }

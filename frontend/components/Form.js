@@ -1,21 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../state/action-creators";
+import * as actionType from "../state/action-types";
 
 export function Form(props) {
   const onChange = (evt) => {
-    evt.preventDefault();
-    props.inputChange(evt.target.id, evt.target.value);
+    props.inputChange(actionType.INPUT_CHANGE, evt.target.id, evt.target.value);
   };
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-    const newQuiz = {
+    const quizInfo = {
       question_text: props.form.newQuestion,
       true_answer_text: props.form.newTrueAnswer,
       false_answer_text: props.form.newFalseAnswer,
     };
-    props.postQuiz(newQuiz, "submittedQuiz");
+    props.postQuiz(quizInfo);
   };
 
   return (
@@ -42,14 +42,12 @@ export function Form(props) {
         placeholder="Enter false answer"
         value={props.form.newFalseAnswer}
       />
-      {props.form.newFalseAnswer &&
-      props.form.newTrueAnswer &&
-      props.form.newQuestion ? (
-        <button id="submitNewQuizBtn" onSubmit={onSubmit}>
-          Submit new quiz
-        </button>
+      {props.form.newQuestion.trim().length > 0 &&
+      props.form.newTrueAnswer.trim().length > 0 &&
+      props.form.newFalseAnswer.trim().length > 0 ? (
+        <button id="submitNewQuizBtn">Submit new quiz</button>
       ) : (
-        <button id="submitNewQuizBtn" onSubmit={onSubmit} disabled>
+        <button id="submitNewQuizBtn" disabled>
           Submit new quiz
         </button>
       )}
