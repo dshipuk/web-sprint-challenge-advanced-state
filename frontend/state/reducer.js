@@ -12,6 +12,12 @@ function wheel(state = initialWheelState, action) {
       } else {
         return state + 1
       }
+    case actions.MOVE_COUNTERCLOCKWISE:
+      if (state === 0) {
+        return state = 5
+      } else {
+        return state - 1
+      }
     default:
       return state
   }

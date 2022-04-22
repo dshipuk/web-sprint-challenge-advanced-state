@@ -7,7 +7,11 @@ export function moveClockwise() {
   }
 }
 
-export function moveCounterClockwise() { }
+export function moveCounterClockwise() { 
+  return {
+    type: actions.MOVE_COUNTERCLOCKWISE
+  }
+}
 
 export function selectAnswer() { }
 

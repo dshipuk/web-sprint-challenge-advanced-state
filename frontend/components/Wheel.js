@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { moveClockwise } from "../state/action-creators"
+import { moveClockwise, moveCounterClockwise } from "../state/action-creators"
 
 const Wheel = (props) => {
   console.log(props)
@@ -23,6 +23,10 @@ const Wheel = (props) => {
   const goClockWise = () => {
     props.moveClockwise()
   }
+
+  const goCounterClockWise = () => {
+    props.moveCounterClockwise()
+  }
   
   return (
     <div id="wrapper">
@@ -35,7 +39,7 @@ const Wheel = (props) => {
         <div className="cog" style={{ "--i": 5 }}></div>{/* --i is a custom CSS property, no need to touch that nor the style object */}
       </div>
       <div id="keypad">
-        <button id="counterClockwiseBtn" >Counter clockwise</button>
+        <button id="counterClockwiseBtn" onClick={goCounterClockWise}>Counter clockwise</button>
         <button id="clockwiseBtn" onClick={goClockWise}>Clockwise</button>
       </div>
     </div>
@@ -48,4 +52,4 @@ const mapState = (s) => {
   }
 }
 
-export default connect(mapState, { moveClockwise })(Wheel);
+export default connect(mapState, { moveClockwise, moveCounterClockwise })(Wheel);
