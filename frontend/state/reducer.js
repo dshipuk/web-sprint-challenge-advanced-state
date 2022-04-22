@@ -1,7 +1,6 @@
 // ❗ You don't need to add extra reducers to achieve MVP
 import { combineReducers } from "redux";
 import * as actions from "./action-types";
-import axios from "axios";
 
 const initialWheelState = 0;
 function wheel(state = initialWheelState, action) {
@@ -29,7 +28,7 @@ function quiz(state = initialQuizState, action) {
     case actions.SET_QUIZ_INTO_STATE:
       return action.payload.quizData;
     case actions.RESET_FORM:
-      return state = null
+      return (state = null);
     default:
       return state;
   }
@@ -39,11 +38,11 @@ const initialSelectedAnswerState = null;
 function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch (action.type) {
     case actions.SET_SELECTED_ANSWER:
-      return state = action.payload.t
+      return (state = action.payload.t);
     case actions.RESET_FORM:
-      return state = null
+      return (state = null);
     default:
-      return state
+      return state;
   }
 }
 
@@ -55,11 +54,11 @@ function infoMessage(state = initialMessageState, action) {
         case "submittedQuiz":
           return (state = `Congrats: "${action.payload.msg}" is a great question!`);
         case "postQuiz":
-          return state = action.payload.msg
+          return (state = action.payload.msg);
         case "error":
-          return state = action.payload.msg
+          return (state = action.payload.msg);
         case "":
-          return state = ""
+          return (state = "");
         default:
           return state;
       }

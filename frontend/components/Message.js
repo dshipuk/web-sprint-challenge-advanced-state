@@ -1,14 +1,14 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from "react";
+import { connect } from "react-redux";
 
 export function Message(props) {
-  return <div id="message">{props.infoMessage}</div>
+  return <div id="message">{props.infoMessage}</div>;
 }
 
 const mapState = (s) => {
   return {
-    infoMessage: s.infoMessage
-  }
-}
+    infoMessage: s.infoMessage,
+  };
+};
 
-export default connect(mapState)(Message)
+export default connect(mapState)(Message);
