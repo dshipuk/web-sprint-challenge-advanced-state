@@ -27,7 +27,6 @@ const initialQuizState = null;
 function quiz(state = initialQuizState, action) {
   switch (action.type) {
     case actions.SET_QUIZ_INTO_STATE:
-      console.log(quiz.data);
       return action.payload.quizData;
     case actions.RESET_FORM:
       return state = null
@@ -56,6 +55,8 @@ function infoMessage(state = initialMessageState, action) {
         case "submittedQuiz":
           return (state = `Congrats: "${action.payload.msg}" is a great question!`);
         case "postQuiz":
+          return state = action.payload.msg
+        case "error":
           return state = action.payload.msg
         case "":
           return state = ""

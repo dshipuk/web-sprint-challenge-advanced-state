@@ -65,26 +65,24 @@ export function fetchQuiz() {
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
     // - Dispatch an action to send the obtained quiz to its state
-    axios.get("http://localhost:9000/api/quiz/next")
+    axios.get("http://localhost:9000/api/quiz/next/")
       .then(res => {
-        console.log(res.data)
         dispatch(setQuiz(res.data))
       })
       .catch(err => {
-        console.error(err)
+        dispatch(setMessage(err.response.data.message, "error"))
       })
 
   };
 }
 export function postAnswer(data, type) {
   return function (dispatch) {
-    axios.post("http://localhost:9000/api/quiz/answer", data)
+    axios.post("http://localhost:9000/api/quiz/answer/", data)
       .then(res => {
-        console.log(res)
         dispatch(setMessage(res.data.message, type))
       })
       .catch(err => {
-        console.log(err)
+        dispatch(setMessage(err.response.data.message, "error"))
       })
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
@@ -97,13 +95,12 @@ export function postAnswer(data, type) {
 export function postQuiz(quizInfo, type) {
   return function (dispatch) {
     // On successful POST:
-    axios.post("http://localhost:9000/api/quiz/new", quizInfo)
+    axios.post("http://localhost:9000/api/quiz/new/", quizInfo)
     .then(res => {
-      console.log(res.data)
       dispatch(setMessage(res.data.question, type))
     })
     .catch(err => {
-      console.log(err)
+      dispatch(setMessage(err.response.data.message, "error"))
     })
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form

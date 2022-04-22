@@ -55,7 +55,6 @@ export function Quiz(props) {
       "quiz_id": props.quiz.quiz_id,
       "answer_id": props.selectedAnswer
     }
-    console.log(info)
     props.postAnswer(info, "postQuiz")
   }
   return (

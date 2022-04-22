@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { moveClockwise, moveCounterClockwise } from "../state/action-creators"
 
 const Wheel = (props) => {
-  console.log(props)
 
   useEffect(() =>{
     const wheelParent = document.getElementById("wheel")
