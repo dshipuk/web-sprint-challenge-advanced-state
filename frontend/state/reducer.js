@@ -55,6 +55,10 @@ function infoMessage(state = initialMessageState, action) {
       switch (action.payload.context) {
         case "submittedQuiz":
           return (state = `Congrats: "${action.payload.msg}" is a great question!`);
+        case "postQuiz":
+          return state = action.payload.msg
+        case "":
+          return state = ""
         default:
           return state;
       }

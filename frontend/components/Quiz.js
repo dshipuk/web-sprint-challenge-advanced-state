@@ -46,6 +46,7 @@ export function Quiz(props) {
         props.selectAnswer(props.quiz.answers[i].answer_id)
       }
     }
+    props.setMessage("", "")
   }
 
   const onSubmit = evt => {
@@ -55,7 +56,7 @@ export function Quiz(props) {
       "answer_id": props.selectedAnswer
     }
     console.log(info)
-    props.postAnswer(info)
+    props.postAnswer(info, "postQuiz")
   }
   return (
     <div id="wrapper">

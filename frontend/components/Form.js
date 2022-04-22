@@ -17,7 +17,7 @@ export function Form(props) {
       "true_answer_text": props.form.newTrueAnswer,
       "false_answer_text": props.form.newFalseAnswer
   }
-    props.postQuiz(newQuiz)
+    props.postQuiz(newQuiz, "submittedQuiz")
   }
 
   return (

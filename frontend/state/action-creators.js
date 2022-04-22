@@ -23,12 +23,12 @@ export function selectAnswer(target) {
   };
 }
 
-export function setMessage(message) {
+export function setMessage(message, type) {
   return {
     type: actions.SET_INFO_MESSAGE,
     payload: {
       msg: message,
-      context: "submittedQuiz",
+      context: type,
     },
   };
 }
@@ -76,12 +76,12 @@ export function fetchQuiz() {
 
   };
 }
-export function postAnswer(data) {
+export function postAnswer(data, type) {
   return function (dispatch) {
     axios.post("http://localhost:9000/api/quiz/answer", data)
       .then(res => {
         console.log(res)
-        dispatch(setMessage(res.data.message))
+        dispatch(setMessage(res.data.message, type))
       })
       .catch(err => {
         console.log(err)
@@ -94,13 +94,13 @@ export function postAnswer(data) {
     dispatch(fetchQuiz())
   };
 }
-export function postQuiz(quizInfo) {
+export function postQuiz(quizInfo, type) {
   return function (dispatch) {
     // On successful POST:
     axios.post("http://localhost:9000/api/quiz/new", quizInfo)
     .then(res => {
       console.log(res.data)
-      dispatch(setMessage(res.data.question))
+      dispatch(setMessage(res.data.question, type))
     })
     .catch(err => {
       console.log(err)
