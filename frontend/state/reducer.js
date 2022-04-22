@@ -41,6 +41,8 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch (action.type) {
     case actions.SET_SELECTED_ANSWER:
       return state = action.payload.t
+    case actions.RESET_FORM:
+      return state = null
     default:
       return state
   }

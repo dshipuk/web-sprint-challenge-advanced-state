@@ -26,13 +26,12 @@ import * as actions from "../state/action-creators"
 
 
 export function Quiz(props) {
-  console.log(props)
-
   useEffect(() => {
     props.fetchQuiz();
   }, [])
 
   const onClick = evt => {
+    evt.preventDefault();
     const main = evt.target.parentElement.parentElement.childNodes
     for (let info of main) {
       info.className = "answer"
@@ -47,7 +46,15 @@ export function Quiz(props) {
     }
   }
 
-  console.log(props)
+  const onSubmit = evt => {
+    evt.preventDefault();
+    const info = {
+      "quiz_id": props.quiz.quiz_id,
+      "answer_id": props.selectedAnswer
+    }
+    console.log(info)
+    props.postAnswer(info)
+  }
   return (
     <div id="wrapper">
       {
@@ -73,7 +80,9 @@ export function Quiz(props) {
               </div>
             </div>
 
-            {props.selectedAnswer === null ? <button id="submitAnswerBtn" disabled >Submit answer</button> : <button id="submitAnswerBtn">Submit answer</button>}
+            {props.selectedAnswer === null 
+            ? <button id="submitAnswerBtn" onClick={onSubmit} disabled >Submit answer</button> 
+            : <button id="submitAnswerBtn" onClick={onSubmit}>Submit answer</button>}
           </>
         )
       }

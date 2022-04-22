@@ -76,12 +76,21 @@ export function fetchQuiz() {
 
   };
 }
-export function postAnswer() {
+export function postAnswer(data) {
   return function (dispatch) {
+    axios.post("http://localhost:9000/api/quiz/answer", data)
+      .then(res => {
+        console.log(res)
+        dispatch(setMessage(res.data.message))
+      })
+      .catch(err => {
+        console.log(err)
+      })
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
     // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
+    dispatch(fetchQuiz())
   };
 }
 export function postQuiz() {
