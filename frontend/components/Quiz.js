@@ -27,7 +27,9 @@ import * as actions from "../state/action-creators"
 
 export function Quiz(props) {
   useEffect(() => {
-    props.fetchQuiz();
+    if (props.quiz === null) {
+      props.fetchQuiz();
+    }
   }, [])
 
   const onClick = evt => {

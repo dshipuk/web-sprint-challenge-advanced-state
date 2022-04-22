@@ -6,6 +6,7 @@ import axios from 'axios'
 export function Form(props) {
 
   const onChange = evt => {
+    evt.preventDefault()
     props.inputChange(evt.target.id, evt.target.value)
   }
 
